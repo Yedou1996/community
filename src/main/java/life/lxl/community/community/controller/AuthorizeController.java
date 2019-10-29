@@ -1,6 +1,7 @@
 package life.lxl.community.community.controller;
 
 import life.lxl.community.community.dto.AccessTokenDTO;
+import life.lxl.community.community.dto.GithupUser;
 import life.lxl.community.community.provider.GithupProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,9 @@ public class AuthorizeController {
         accessTokenDTO.setCode(code);
         accessTokenDTO.setRedirect_uri("http://localhost:8080/callback");
         accessTokenDTO.setState(state);
-        githupProvider.getAccessToken(accessTokenDTO);
-    return  "index";
+        String accessToken = githupProvider.getAccessToken(accessTokenDTO);
+        GithupUser user = githupProvider.getUser(accessToken);
+        System.out.println(user.getName());
+        return  "index";
     }
 }
