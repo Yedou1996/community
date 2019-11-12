@@ -4,6 +4,15 @@ public class GithupUser {
     private String name;
     private long id;
     private String bio;
+    private  String avatarUrl;
+
+    public String getAvatar_url() {
+        return avatarUrl;
+    }
+
+    public void setAvatar_url(String avatar_url) {
+        this.avatarUrl = avatar_url;
+    }
 
     public String getName() {
         return name;

@@ -51,6 +51,7 @@ public class AuthorizeController {
            user.setName(githupUser.getName());
            user.setGmtCreate(System.currentTimeMillis());
            user.setGmtModified(user.getGmtCreate());
+           user.setAvatarUrl(githupUser.getAvatar_url());
            userMapper.insert(user);
            response.addCookie(new Cookie("token",token));
 
