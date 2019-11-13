@@ -1,7 +1,6 @@
 package life.lxl.community.community.controller;
 
 import life.lxl.community.community.dto.PaginationDTO;
-import life.lxl.community.community.dto.QuestionDTO;
 import life.lxl.community.community.mapper.UserMapper;
 import life.lxl.community.community.model.User;
 import life.lxl.community.community.service.QuestionService;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 
 @Controller
