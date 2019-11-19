@@ -5,8 +5,10 @@ import life.lxl.community.community.dto.GithupUser;
 import life.lxl.community.community.mapper.UserMapper;
 import life.lxl.community.community.model.User;
 import life.lxl.community.community.provider.GithupProvider;
+import life.lxl.community.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.devtools.tunnel.server.HttpTunnelServer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,12 +30,11 @@ public class AuthorizeController {
     @Value("${githup.Redirect_uri}")
     private String redirect_uri;
    @Autowired
-    private UserMapper userMapper;
+   private UserService userService;
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name  ="code") String code,
                            @RequestParam(name="state") String state,
-                           HttpServletRequest request,
                            HttpServletResponse response){
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
@@ -49,10 +50,9 @@ public class AuthorizeController {
            user.setToken(token);
            user.setAccountId(String.valueOf(githupUser.getId()));
            user.setName(githupUser.getName());
-           user.setGmtCreate(System.currentTimeMillis());
-           user.setGmtModified(user.getGmtCreate());
            user.setAvatarUrl(githupUser.getAvatar_url());
-           userMapper.insert(user);
+           userService.createOrUpdate(user);
+
            response.addCookie(new Cookie("token",token));
 
 
@@ -61,5 +61,14 @@ public class AuthorizeController {
        }else {
            return "redirect:/";
        }
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response){
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 }
