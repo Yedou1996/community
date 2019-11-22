@@ -1,5 +1,7 @@
   package life.lxl.community.community;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.logging.Logger;
 
   @SpringBootApplication
+  @MapperScan(basePackages = "life.lxl.community.community.mapper")
 public class CommunityApplication {
 
     public static void main(String[] args) {

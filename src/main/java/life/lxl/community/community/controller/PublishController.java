@@ -1,8 +1,6 @@
 package life.lxl.community.community.controller;
 
 import life.lxl.community.community.dto.QuestionDTO;
-import life.lxl.community.community.mapper.QuestionMapper;
-import life.lxl.community.community.mapper.UserMapper;
 import life.lxl.community.community.model.Question;
 import life.lxl.community.community.model.User;
 import life.lxl.community.community.service.QuestionService;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
